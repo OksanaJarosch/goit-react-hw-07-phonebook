@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 export const App = () => {
 
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(state => state.contacts.items);
 
   return (
     <Container>

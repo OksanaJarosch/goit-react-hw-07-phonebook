@@ -1,13 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Contact, Span, Btn } from "./Contacts.styled";
 import { RiDeleteBin6Line } from 'react-icons/ri';
-import { deleteContact } from "redux/contactsSlice";
+import { useEffect } from "react";
+import { deleteContact, fetchContacts } from "redux/operations";
 
 export const Contacts = () => {
     
     const dispatch = useDispatch();
-    const contacts = useSelector(state => state.contacts);
+    const contacts = useSelector(state => state.contacts.items);
     const filter = useSelector(state => state.filter);
+
+    useEffect(() => {
+        dispatch(fetchContacts());
+    }, [dispatch]);
 
     const getVisibleContacts = () => {
 
@@ -26,6 +31,7 @@ export const Contacts = () => {
             <ul>
             {visibleContacts.map(contact => {
                 const { id, name, number } = contact;
+                console.log(id);
 
                     return (
                         <Contact key={id}>

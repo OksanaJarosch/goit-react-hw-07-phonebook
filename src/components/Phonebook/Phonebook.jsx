@@ -1,8 +1,8 @@
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { StyledForm, StyledInput, StyledLabel, StyledButton, Error } from './Phonebook.styled';
-import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
+import { useSelector } from 'react-redux';
+// import { addContact } from 'redux/contactsSlice';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 
 
@@ -15,7 +15,7 @@ const schema = Yup.object().shape({
     
 export const Phonebook = () => { 
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const contacts = useSelector(state => state.contacts);
 
 
@@ -31,7 +31,7 @@ export const Phonebook = () => {
         );
         return
         } 
-        dispatch(addContact(values));
+        // dispatch(addContact(values));
     }
 
     
