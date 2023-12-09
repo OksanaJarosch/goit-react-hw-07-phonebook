@@ -1,9 +1,9 @@
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { StyledForm, StyledInput, StyledLabel, StyledButton, Error } from './Phonebook.styled';
-import { useSelector } from 'react-redux';
-// import { addContact } from 'redux/contactsSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import { Report } from 'notiflix/build/notiflix-report-aio';
+import { addNewContact } from 'redux/operations';
 
 
 const schema = Yup.object().shape({
@@ -15,8 +15,8 @@ const schema = Yup.object().shape({
     
 export const Phonebook = () => { 
 
-    // const dispatch = useDispatch();
-    const contacts = useSelector(state => state.contacts);
+    const dispatch = useDispatch();
+    const contacts = useSelector(state => state.contacts.items);
 
 
     const handleAddContact = values => {
@@ -31,7 +31,7 @@ export const Phonebook = () => {
         );
         return
         } 
-        // dispatch(addContact(values));
+        dispatch(addNewContact(values));
     }
 
     

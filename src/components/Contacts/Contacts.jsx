@@ -31,7 +31,6 @@ export const Contacts = () => {
             <ul>
             {visibleContacts.map(contact => {
                 const { id, name, number } = contact;
-                console.log(id);
 
                     return (
                         <Contact key={id}>
