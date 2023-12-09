@@ -3,7 +3,7 @@ import { Contact, Span, Btn } from "./Contacts.styled";
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { useEffect } from "react";
 import { deleteContact, fetchContacts } from "redux/operations";
-import { selectContacts, selectFilter, selectVisibleContacts } from "redux/selectors";
+import { selectContacts, selectError, selectFilter, selectVisibleContacts } from "redux/selectors";
 import toast from 'react-hot-toast';
 
 export const Contacts = () => {
@@ -12,6 +12,7 @@ export const Contacts = () => {
     const contacts = useSelector(selectContacts);
     const visible = useSelector(selectVisibleContacts);
     const filter = useSelector(selectFilter);
+    const error = useSelector(selectError);
 
 
     useEffect(() => {
@@ -31,15 +32,12 @@ export const Contacts = () => {
 
 
     const onDelete = async (id) => {
-        try {
-        await dispatch(deleteContact(id));
-        toast.success('Contact deleted successfully!');
-        } catch (error) {
-        toast.error('Error deleting contact.');
-        }
+            await dispatch(deleteContact(id));
+            error && toast.error('Error deleting contact.');
     }
 
     return (
+        <>
             <ul>
             {visibleContacts.map(contact => {
                 const { id, name, number } = contact;
@@ -54,5 +52,6 @@ export const Contacts = () => {
                     )
                 })}
         </ul>
+        </>
     )
 };

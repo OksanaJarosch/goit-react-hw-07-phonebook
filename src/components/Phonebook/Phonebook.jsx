@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import { addNewContact } from 'redux/operations';
 import { selectContacts, selectIsLoading } from 'redux/selectors';
+import toast from 'react-hot-toast';
 
 
 const schema = Yup.object().shape({
@@ -33,6 +34,7 @@ export const Phonebook = () => {
         return
         } 
         dispatch(addNewContact(values));
+        toast.success('Successfully created!');
     }
 
     
