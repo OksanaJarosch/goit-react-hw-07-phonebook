@@ -4,6 +4,7 @@ import { StyledForm, StyledInput, StyledLabel, StyledButton, Error } from './Pho
 import { useDispatch, useSelector } from 'react-redux';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import { addNewContact } from 'redux/operations';
+import { selectContacts, selectIsLoading } from 'redux/selectors';
 
 
 const schema = Yup.object().shape({
@@ -12,11 +13,11 @@ const schema = Yup.object().shape({
 });
 
 
-    
 export const Phonebook = () => { 
 
     const dispatch = useDispatch();
-    const contacts = useSelector(state => state.contacts.items);
+    const contacts = useSelector(selectContacts);
+    const isLoading = useSelector(selectIsLoading);
 
 
     const handleAddContact = values => {
@@ -59,7 +60,7 @@ export const Phonebook = () => {
                             <StyledInput type="tel" name="number" placeholder="Enter a number"/>
                             <Error name="number" component="p"/>
                     </StyledLabel>
-                    <StyledButton type="submit">Add contact</StyledButton>
+                    <StyledButton type="submit" disabled={isLoading}>Add contact</StyledButton>
                     </StyledForm>
                 </Formik>
     )
